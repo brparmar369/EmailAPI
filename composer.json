@@ -1,0 +1,10 @@
+{
+    "autoload": {
+      "psr-4": {
+        "Email\\": "src/Email/"
+      }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "9.5"
+    }
+}
