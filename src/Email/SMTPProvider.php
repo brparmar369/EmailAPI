@@ -15,9 +15,9 @@ class SMTPProvider implements EmailServiceProvider
      * @param string $recipient The email address of the recipient.
      * @param string $subject The subject of the email.
      * @param string $body The body content of the email.
-     * @param array $templateData An associative array containing dynamic data to populate the email template (optional).
+     * @param array $templateData An associative array of dynamic data for template variables (optional).
      * 
-     * Returns `true` if the email was sent successfully, `false` otherwise.
+     * Returns 'true' if the email was sent successfully, 'false' otherwise.
      */
     public function sendEmail(
         string $recipient, 
@@ -25,6 +25,12 @@ class SMTPProvider implements EmailServiceProvider
         string $body, 
         array $templateData = []
     ) {
+        // Validate the recipient email
+        if (!filter_var($recipient, FILTER_VALIDATE_EMAIL)) 
+        {
+            return false;
+        }
+        
         TemplateEngine::applyTemplate($body, $templateData);
 
         echo "Email sent via SMTP to $recipient\n";

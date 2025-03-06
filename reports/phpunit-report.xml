@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="" tests="16" assertions="17" errors="0" warnings="0" failures="0" skipped="0" time="0.208286">
+    <testsuite name="EmailAPI Test Suite" tests="16" assertions="17" errors="0" warnings="0" failures="0" skipped="0" time="0.208286">
+      <testsuite name="EmailApiTest" file="C:\xampp\htdocs\EmailAPI\tests\ApiTest.php" tests="4" assertions="4" errors="0" warnings="0" failures="0" skipped="0" time="0.170835">
+        <testcase name="testIsJwtPresentWithValidToken" class="EmailApiTest" classname="EmailApiTest" file="C:\xampp\htdocs\EmailAPI\tests\ApiTest.php" line="14" assertions="1" time="0.151055"/>
+        <testcase name="testHandleRequestWhenJwtIsMissing" class="EmailApiTest" classname="EmailApiTest" file="C:\xampp\htdocs\EmailAPI\tests\ApiTest.php" line="32" assertions="1" time="0.003664"/>
+        <testcase name="testHandleRequestWithValidInput" class="EmailApiTest" classname="EmailApiTest" file="C:\xampp\htdocs\EmailAPI\tests\ApiTest.php" line="57" assertions="1" time="0.015483"/>
+        <testcase name="testHandleRequestWithInvalidInput" class="EmailApiTest" classname="EmailApiTest" file="C:\xampp\htdocs\EmailAPI\tests\ApiTest.php" line="89" assertions="1" time="0.000633"/>
+      </testsuite>
+      <testsuite name="EmailFailoverManagerTest" file="C:\xampp\htdocs\EmailAPI\tests\EmailFailoverManagerTest.php" tests="4" assertions="5" errors="0" warnings="0" failures="0" skipped="0" time="0.031904">
+        <testcase name="testSuccessFirstProvider" class="EmailFailoverManagerTest" classname="EmailFailoverManagerTest" file="C:\xampp\htdocs\EmailAPI\tests\EmailFailoverManagerTest.php" line="19" assertions="1" time="0.012226"/>
+        <testcase name="testSuccessSecondProvider" class="EmailFailoverManagerTest" classname="EmailFailoverManagerTest" file="C:\xampp\htdocs\EmailAPI\tests\EmailFailoverManagerTest.php" line="41" assertions="1" time="0.013172"/>
+        <testcase name="testAllProvidersFail" class="EmailFailoverManagerTest" classname="EmailFailoverManagerTest" file="C:\xampp\htdocs\EmailAPI\tests\EmailFailoverManagerTest.php" line="67" assertions="1" time="0.002709"/>
+        <testcase name="testFailoverLimitExceeded" class="EmailFailoverManagerTest" classname="EmailFailoverManagerTest" file="C:\xampp\htdocs\EmailAPI\tests\EmailFailoverManagerTest.php" line="94" assertions="2" time="0.003797"/>
+      </testsuite>
+      <testsuite name="EmailServiceTest" file="C:\xampp\htdocs\EmailAPI\tests\EmailServiceTest.php" tests="2" assertions="2" errors="0" warnings="0" failures="0" skipped="0" time="0.001405">
+        <testcase name="testSendEmailServiceSuccess" class="EmailServiceTest" classname="EmailServiceTest" file="C:\xampp\htdocs\EmailAPI\tests\EmailServiceTest.php" line="18" assertions="1" time="0.000954"/>
+        <testcase name="testSendEmailServiceFailure" class="EmailServiceTest" classname="EmailServiceTest" file="C:\xampp\htdocs\EmailAPI\tests\EmailServiceTest.php" line="36" assertions="1" time="0.000450"/>
+      </testsuite>
+      <testsuite name="Tests\Email\MailChimpProviderTest" file="C:\xampp\htdocs\EmailAPI\tests\MailChimpProviderTest.php" tests="2" assertions="2" errors="0" warnings="0" failures="0" skipped="0" time="0.001208">
+        <testcase name="testSendEmailValid" class="Tests\Email\MailChimpProviderTest" classname="Tests.Email.MailChimpProviderTest" file="C:\xampp\htdocs\EmailAPI\tests\MailChimpProviderTest.php" line="21" assertions="1" time="0.000266">
+          <system-out>Email sent via MailChimp to test@example.com
+</system-out>
+        </testcase>
+        <testcase name="testSendEmailInvalid" class="Tests\Email\MailChimpProviderTest" classname="Tests.Email.MailChimpProviderTest" file="C:\xampp\htdocs\EmailAPI\tests\MailChimpProviderTest.php" line="36" assertions="1" time="0.000942"/>
+      </testsuite>
+      <testsuite name="Tests\Email\SMTPProviderTest" file="C:\xampp\htdocs\EmailAPI\tests\SMTPProviderTest.php" tests="2" assertions="2" errors="0" warnings="0" failures="0" skipped="0" time="0.001135">
+        <testcase name="testSendEmailValid" class="Tests\Email\SMTPProviderTest" classname="Tests.Email.SMTPProviderTest" file="C:\xampp\htdocs\EmailAPI\tests\SMTPProviderTest.php" line="21" assertions="1" time="0.000530">
+          <system-out>Email sent via SMTP to test@example.com
+</system-out>
+        </testcase>
+        <testcase name="testSendEmailInvalid" class="Tests\Email\SMTPProviderTest" classname="Tests.Email.SMTPProviderTest" file="C:\xampp\htdocs\EmailAPI\tests\SMTPProviderTest.php" line="36" assertions="1" time="0.000605"/>
+      </testsuite>
+      <testsuite name="TemplateEngineTest" file="C:\xampp\htdocs\EmailAPI\tests\TemplateEngineTest.php" tests="2" assertions="2" errors="0" warnings="0" failures="0" skipped="0" time="0.001799">
+        <testcase name="testApplyTemplate" class="TemplateEngineTest" classname="TemplateEngineTest" file="C:\xampp\htdocs\EmailAPI\tests\TemplateEngineTest.php" line="16" assertions="1" time="0.001497"/>
+        <testcase name="testApplyTemplateMissingData" class="TemplateEngineTest" classname="TemplateEngineTest" file="C:\xampp\htdocs\EmailAPI\tests\TemplateEngineTest.php" line="31" assertions="1" time="0.000302"/>
+      </testsuite>
+    </testsuite>
+  </testsuite>
+</testsuites>

@@ -1,7 +1,7 @@
 <?php
 
-// Autoload the necessary classes using PSR-4 autoloading
-spl_autoload_register(function (string $class): void {
+// Autoload the necessary classes using autoloading
+spl_autoload_register(function (string $class) {
     $baseDir = __DIR__ . '/../src/';
     $file = $baseDir . str_replace('\\', '/', $class) . '.php';
 
@@ -15,11 +15,11 @@ use Email\EmailAPi;
 /**
  * Entry point for the Email API.
  *
- * Expected JSON payload:
+ * Expected JSON:
  * - recipient: string - The email address of the recipient.
  * - subject: string - The subject of the email.
  * - body: string - The body content of the email.
- * - templateData (optional): array - Key-value pairs for dynamic template data (e.g., {username}).
+ * - templateData (optional): associative array for dynamic template data ({username}).
  *
  */
 

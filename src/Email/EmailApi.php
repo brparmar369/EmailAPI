@@ -6,37 +6,47 @@ namespace Email;
  * Class Api
  *
  * Handles incoming HTTP requests and sends emails via the email service.
- * This class serves as the entry point for the RESTful API.
+ * This class serves as the entry point for the Email API.
  */
 class EmailApi
 {
     /**
-     * EmailAPi constructor.
+     * EmailApi constructor.
      *
-     * Initializes the response header to `application/json`.
+     * Initializes the response header to 'application/json'.
      */
     public function __construct()
     {
         // Prevent error if headers are already sent
         if (headers_sent()) {
-            return; 
-    }
+            return;
+        }
         header('Content-Type: application/json');
     }
 
     /**
      * Handles the HTTP request.
-     *
+     * - Validate the JWT Token is set or not.
      * - Reads the input request payload.
      * - Validates the input fields.
-     * - Sends the email via the configured providers with failover support.
+     * - Sends the email via the providers with failover support.
      * - Returns a JSON response indicating success or failure.
      *
      */
     public function handleRequest()
     {
+        // Checking the JWT token is present.
+        if (!$this->isJwtPresent()) {
+            echo json_encode([
+                'message' => 'Unauthorized: JWT token is missing.',
+            ]);
+            return;
+        }
+
+        // Handle POST request
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $input = json_decode(file_get_contents('php://input'), true);
+            // Using method for input reading
+            $input = $this->getRequestInput();
             /*
             * Example JSON:
             * {
@@ -56,12 +66,12 @@ class EmailApi
                 $body = $input['body'];
                 $templateData = $input['templateData'] ?? [];
 
-                // Providers
+                // Providers array for passing in failoverManager
                 $providers = [new MailChimpProvider(), new SMTPProvider()];
-                
+
                 // Failover Manager
-                $failoverManager = new EmailServiceFailoverManager($providers);
-                
+                $failoverManager = new EmailFailoverManager($providers);
+
                 // Email Service with failoverManager dependency
                 $emailService = new EmailService($failoverManager);
 
@@ -82,5 +92,35 @@ class EmailApi
                 'message' => 'Only POST method is allowed.',
             ]);
         }
+    }
+
+    /**
+     * Checking if JWT token is present in the Authorization header.
+     * Return True if the JWT token is present, false otherwise.
+     */
+    public function isJwtPresent()
+    {
+        // Check if Authorization exists.
+        if (isset($_SERVER['HTTP_AUTHORIZATION'])) {
+            $authHeader = $_SERVER['HTTP_AUTHORIZATION'];
+        
+            // Checking if the Authorization header starts with "Bearer "
+            if (strpos($authHeader, 'Bearer ') === 0) {
+                //  Remove the Bearer string.
+                $token = substr($authHeader, 7);
+                
+                if (!empty($token)) {
+                    return true;
+                }
+            }
+        }        
+        return false;
+    }
+    /**
+     * Reading of input data.
+     */
+    public function getRequestInput()
+    {
+        return json_decode(file_get_contents('php://input'), true);
     }
 }

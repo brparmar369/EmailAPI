@@ -5,23 +5,21 @@ namespace Email;
 /**
  * Class EmailService
  *
- * Service class that manages sending emails through different providers.
+ * EmailService class that manages sending emails through different providers.
  * Uses failover mechanism to try multiple providers if the first one fails.
  *
  */
 class EmailService
 {
     /**
-     * @var EmailServiceFailoverManager The failover manager responsible for handling multiple providers.
+     * @var EmailFailoverManager The failover manager responsible for handling multiple providers.
      */
-    public EmailServiceFailoverManager $failoverManager;
+    public EmailFailoverManager $failoverManager;
 
     /**
      * Constructor for EmailService.
-     *
-     * @param EmailServiceFailoverManager $failoverManager The failover manager responsible for handling multiple providers.
      */
-    public function __construct(EmailServiceFailoverManager $failoverManager)
+    public function __construct(EmailFailoverManager $failoverManager)
     {
         $this->failoverManager = $failoverManager;
     }
@@ -34,7 +32,7 @@ class EmailService
      * @param string $body The body content of the email.
      * @param array  $templateData An associative array containing dynamic data to populate the email template (optional).
      *
-     * @return bool Returns `true` if an email is successfully sent, `false` otherwise.
+     * Returns 'true' if an email is successfully sent, 'false' otherwise.
      */
     public function sendEmailService(
         string $recipient,
@@ -42,6 +40,11 @@ class EmailService
         string $body,
         array $templateData = []
     ) {
-        return $this->failoverManager->sendEmailOverFailoverManager($recipient, $subject, $body, $templateData);
+        try {
+            return $this->failoverManager->sendEmailOverFailoverManager($recipient, $subject, $body, $templateData);
+        } catch (Exception $e) {
+            error_log("Email Sending Failed." . $e->getMessage());
+            return false;
+        }
     }
 }
