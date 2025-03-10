@@ -17,10 +17,10 @@ class EmailApiTest extends TestCase
         $_SERVER['HTTP_AUTHORIZATION'] = 'Bearer testJWTToken';
 
         $emailApi = $this->getMockBuilder(EmailApi::class)
-                         ->setMethods(['getallheaders'])
+                         ->setMethods(['getRequestInput'])
                          ->getMock();
 
-        $emailApi->method('getallheaders')
+        $emailApi->method('getRequestInput')
                  ->willReturn(['Authorization' => 'Bearer testJWTToken']);
 
         $this->assertTrue($emailApi->isJwtPresent());
@@ -35,11 +35,11 @@ class EmailApiTest extends TestCase
         $_SERVER['HTTP_AUTHORIZATION'] = null;
 
         $emailApi = $this->getMockBuilder(EmailApi::class)
-                         ->setMethods(['isJwtPresentorNot'])
+                         ->setMethods(['isJwtPresent'])
                          ->getMock();
 
         // isJwtPresent method to return false when JWT is missing.
-        $emailApi->method('isJwtPresentorNot')
+        $emailApi->method('isJwtPresent')
                  ->willReturn(false);
 
         // Start output buffering
@@ -60,10 +60,10 @@ class EmailApiTest extends TestCase
         $_SERVER['HTTP_AUTHORIZATION'] = 'Bearer testJWTToken';
 
         $emailApi = $this->getMockBuilder(EmailApi::class)
-                         ->setMethods(['getRequestInput', 'isJwtPresentorNot'])
+                         ->setMethods(['getRequestInput', 'isJwtPresent'])
                          ->getMock();
 
-        $emailApi->method('isJwtPresentorNot')
+        $emailApi->method('isJwtPresent')
                  ->willReturn(true);
 
         $inputData = [
@@ -92,10 +92,10 @@ class EmailApiTest extends TestCase
         $_SERVER['HTTP_AUTHORIZATION'] = 'Bearer testJWTToken';
 
         $emailApi = $this->getMockBuilder(EmailApi::class)
-                         ->setMethods(['getRequestInput', 'isJwtPresentorNot'])
+                         ->setMethods(['getRequestInput', 'isJwtPresent'])
                          ->getMock();
 
-        $emailApi->method('isJwtPresentorNot')
+        $emailApi->method('isJwtPresent')
                  ->willReturn(true);
 
         $inputData = [
